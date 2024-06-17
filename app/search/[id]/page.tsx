@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: SearchIdPageProps) {
   };
 }
 
-export default async function SearchIdPage({ params }: SearchPageProps) {
+export default async function SearchIdPage({ params }: SearchIdPageProps) {
   const userId = "anonymous";
   const chat = await getChat(params.id, userId);
 
