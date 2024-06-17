@@ -27,7 +27,6 @@ An AI-powered search engine with a generative UI.
 - Use as a search engine [※](#-search-engine)
 - Support for providers other than OpenAI
   - Google Generative AI Provider support [※](https://github.com/miurla/morphic/issues/192)
-  - Ollama Provider support ([Unstable](https://github.com/miurla/morphic/issues/215))
 - Specify the model to generate answers
   - Groq API support [※](https://github.com/miurla/morphic/pull/58)
 
@@ -143,8 +142,6 @@ This will allow you to use Morphic as your default search engine in the browser.
   - gpt-3.5-turbo
 - Google
   - Gemini 1.5 pro [※](https://github.com/miurla/morphic/issues/192)
-- Ollama (Unstable)
-  - mistral/openhermes & Phi3/llama3 [※](https://github.com/miurla/morphic/issues/215)
 
 ### List of verified models that can be specified to writers:
 

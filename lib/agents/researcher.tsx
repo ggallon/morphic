@@ -18,24 +18,10 @@ export async function researcher(
 ) {
   let fullResponse = "";
   let hasError = false;
-
-  // Transform the messages if using Ollama provider
-  let processedMessages = messages;
-  const useOllamaProvider = !!(
-    process.env.OLLAMA_MODEL && process.env.OLLAMA_BASE_URL
-  );
-  if (useOllamaProvider) {
-    processedMessages = transformToolMessages(messages);
-  }
-  const includeToolResponses = messages.some(
-    (message) => message.role === "tool",
-  );
-  const useSubModel = useOllamaProvider && includeToolResponses;
-
   const answerSection = <AnswerSection result={streamableText.value} />;
   const currentDate = new Date().toLocaleString();
   const result = await streamText({
-    model: getModel(useSubModel),
+    model: getModel(),
     maxTokens: 2500,
     system: `As a professional search expert, you possess the ability to search for any information on the web.
     or any information on the web.
@@ -47,7 +33,7 @@ export async function researcher(
     The retrieve tool can only be used with URLs provided by the user. URLs from search results cannot be used.
     If it is a domain instead of a URL, specify it in the include_domains of the search tool.
     Please match the language of the response to the user's language. Current date and time: ${currentDate}`,
-    messages: processedMessages,
+    messages,
     tools: getTools({
       uiStream,
       fullResponse,
