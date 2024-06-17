@@ -1,31 +1,15 @@
 import { google } from "@ai-sdk/google";
 import { createOpenAI } from "@ai-sdk/openai";
 import type { CoreMessage } from "ai";
-import { createOllama } from "ollama-ai-provider";
 
-export function getModel(useSubModel = false) {
-  const ollamaBaseUrl = process.env.OLLAMA_BASE_URL + "/api";
-  const ollamaModel = process.env.OLLAMA_MODEL;
-  const ollamaSubModel = process.env.OLLAMA_SUB_MODEL;
+export function getModel() {
   const openaiApiBase = process.env.OPENAI_API_BASE;
   const openaiApiKey = process.env.OPENAI_API_KEY;
   let openaiApiModel = process.env.OPENAI_API_MODEL || "gpt-4o";
   const googleApiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
 
-  if (!(ollamaBaseUrl && ollamaModel) && !openaiApiKey && !googleApiKey) {
-    throw new Error(
-      "Missing environment variables for Ollama, OpenAI, or Google",
-    );
-  }
-  // Ollama
-  if (ollamaBaseUrl && ollamaModel) {
-    const ollama = createOllama({ baseURL: ollamaBaseUrl });
-
-    if (useSubModel && ollamaSubModel) {
-      return ollama(ollamaSubModel);
-    }
-
-    return ollama(ollamaModel);
+  if (!openaiApiKey && !googleApiKey) {
+    throw new Error("Missing environment variables for OpenAI, or Google");
   }
 
   if (process.env.GOOGLE_GENERATIVE_AI_API_KEY) {
@@ -33,7 +17,6 @@ export function getModel(useSubModel = false) {
   }
 
   // Fallback to OpenAI instead
-
   const openai = createOpenAI({
     baseURL: openaiApiBase, // optional base URL for proxies etc.
     apiKey: openaiApiKey, // optional API key, default to env property OPENAI_API_KEY
