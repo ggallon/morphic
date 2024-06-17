@@ -1,6 +1,6 @@
 "use client";
 
-import { StreamableValue } from "ai/rsc";
+import type { StreamableValue } from "ai/rsc";
 import type { UIState } from "@/app/actions";
 import { CollapsibleMessage } from "./collapsible-message";
 
@@ -8,11 +8,11 @@ interface ChatMessagesProps {
   messages: UIState;
 }
 
-type GroupedMessage = {
+interface GroupedMessage {
   id: string;
   components: React.ReactNode[];
   isCollapsed?: StreamableValue<boolean> | undefined;
-};
+}
 
 export function ChatMessages({ messages }: ChatMessagesProps) {
   if (!messages.length) {

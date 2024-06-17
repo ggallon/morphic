@@ -1,6 +1,6 @@
 "use client";
 
-import { StreamableValue, useStreamableValue } from "ai/rsc";
+import { useStreamableValue, type StreamableValue } from "ai/rsc";
 import type { SearchResults as TypeSearchResults } from "@/lib/types";
 import { SearchResults } from "./search-results";
 import { SearchResultsImageSection } from "./search-results-image";
@@ -8,10 +8,10 @@ import { SearchSkeleton } from "./search-skeleton";
 import { Section } from "./section";
 import { ToolBadge } from "./tool-badge";
 
-type SearchSectionProps = {
+interface SearchSectionProps {
   result?: StreamableValue<string>;
   includeDomains?: string[];
-};
+}
 
 export function SearchSection({ result, includeDomains }: SearchSectionProps) {
   const [data, error, pending] = useStreamableValue(result);
