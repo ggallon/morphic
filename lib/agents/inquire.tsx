@@ -1,6 +1,6 @@
 import { streamObject, type CoreMessage } from "ai";
 import { createStreamableUI, createStreamableValue } from "ai/rsc";
-import { Copilot } from "@/components/copilot";
+import { Copilot } from "@/components/ai/copilot";
 import { inquirySchema, type PartialInquiry } from "@/lib/schema/inquiry";
 import { getModel } from "@/lib/utils/get-model";
 

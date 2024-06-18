@@ -11,8 +11,8 @@ import type { UIState } from "@/ai/types";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useAppState } from "@/lib/utils/app-state";
+import { UserMessage } from "./ai/user-message";
 import { EmptyScreen } from "./empty-screen";
-import { UserMessage } from "./user-message";
 
 interface ChatPanelProps {
   messages: UIState;

@@ -6,9 +6,9 @@ import {
   createStreamableValue,
   getMutableAIState,
 } from "ai/rsc";
-import { ErrorCard } from "@/components/error-card";
-import { FollowupPanel } from "@/components/followup-panel";
-import { Section } from "@/components/section";
+import { ErrorCard } from "@/components/ai/error-card";
+import { FollowupPanel } from "@/components/ai/followup-panel";
+import { Section } from "@/components/ai/section";
 import { Spinner } from "@/components/ui/spinner";
 import { inquire, querySuggestor, researcher, taskManager } from "@/lib/agents";
 import { writer } from "@/lib/agents/writer";

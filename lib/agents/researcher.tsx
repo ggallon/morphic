@@ -5,8 +5,8 @@ import {
   type ToolResultPart,
 } from "ai";
 import { createStreamableUI, createStreamableValue } from "ai/rsc";
-import { AnswerSection } from "@/components/answer-section";
-import { AnswerSectionGenerated } from "@/components/answer-section-generated";
+import { AnswerSection } from "@/components/ai/answer-section";
+import { AnswerSectionGenerated } from "@/components/ai/answer-section-generated";
 import { getModel } from "@/lib/utils/get-model";
 import { getTools } from "./tools";
 

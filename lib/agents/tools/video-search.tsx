@@ -1,6 +1,6 @@
 import { tool } from "ai";
 import { createStreamableValue } from "ai/rsc";
-import { VideoSearchSection } from "@/components/video-search-section";
+import { VideoSearchSection } from "@/components/ai/video-search-section";
 import { searchSchema } from "@/lib/schema/search";
 import type { ToolProps } from "./types";
 

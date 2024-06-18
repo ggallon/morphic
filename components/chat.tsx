@@ -3,7 +3,7 @@
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import { useUIState } from "ai/rsc";
-import { ChatMessages } from "./chat-messages";
+import { ChatMessages } from "./ai/chat-messages";
 import { ChatPanel } from "./chat-panel";
 
 interface ChatProps {

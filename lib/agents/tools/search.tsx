@@ -1,7 +1,7 @@
 import { tool } from "ai";
 import { createStreamableValue } from "ai/rsc";
 import Exa from "exa-js";
-import { SearchSection } from "@/components/search-section";
+import { SearchSection } from "@/components/ai/search-section";
 import { searchSchema } from "@/lib/schema/search";
 import type { ToolProps } from "./types";
 

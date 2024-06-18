@@ -1,13 +1,13 @@
 import { createStreamableValue } from "ai/rsc";
-import { AnswerSection } from "@/components/answer-section";
-import { CopilotDisplay } from "@/components/copilot-display";
-import { FollowupPanel } from "@/components/followup-panel";
-import { RetrieveSection } from "@/components/retrieve-section";
-import { SearchRelated } from "@/components/search-related";
-import { SearchSection } from "@/components/search-section";
-import { Section } from "@/components/section";
-import { UserMessage } from "@/components/user-message";
-import { VideoSearchSection } from "@/components/video-search-section";
+import { AnswerSection } from "@/components/ai/answer-section";
+import { CopilotDisplay } from "@/components/ai/copilot-display";
+import { FollowupPanel } from "@/components/ai/followup-panel";
+import { RetrieveSection } from "@/components/ai/retrieve-section";
+import { SearchRelated } from "@/components/ai/search-related";
+import { SearchSection } from "@/components/ai/search-section";
+import { Section } from "@/components/ai/section";
+import { UserMessage } from "@/components/ai/user-message";
+import { VideoSearchSection } from "@/components/ai/video-search-section";
 import type { AIState } from "./types";
 
 export const getUIStateFromAIState = (aiState: AIState) => {

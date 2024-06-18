@@ -1,7 +1,7 @@
 import { streamObject, type CoreMessage } from "ai";
 import { createStreamableUI, createStreamableValue } from "ai/rsc";
-import { SearchRelated } from "@/components/search-related";
-import { Section } from "@/components/section";
+import { SearchRelated } from "@/components/ai/search-related";
+import { Section } from "@/components/ai/section";
 import { relatedSchema, type PartialRelated } from "@/lib/schema/related";
 import { getModel } from "@/lib/utils/get-model";
 
