@@ -8,7 +8,7 @@ import {
   type StreamableValue,
 } from "ai/rsc";
 import { ArrowRight, Check, FastForward, Sparkles } from "lucide-react";
-import type { AI } from "@/app/actions";
+import { AI } from "@/ai/provider";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";

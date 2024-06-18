@@ -1,3 +1,5 @@
+import type { AIMessage } from "@/ai/types";
+
 export interface SearchResults {
   images: string[];
   results: SearchResultItem[];
@@ -52,21 +54,4 @@ export interface Chat extends Record<string, any> {
   path: string;
   messages: AIMessage[];
   sharePath?: string;
-}
-
-export interface AIMessage {
-  role: "user" | "assistant" | "system" | "function" | "data" | "tool";
-  content: string;
-  id: string;
-  name?: string;
-  type?:
-    | "answer"
-    | "related"
-    | "skip"
-    | "inquiry"
-    | "input"
-    | "input_related"
-    | "tool"
-    | "followup"
-    | "end";
 }

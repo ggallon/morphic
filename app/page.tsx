@@ -1,6 +1,6 @@
 import { generateId } from "ai";
+import { AI } from "@/ai/provider";
 import { Chat } from "@/components/chat";
-import { AI } from "./actions";
 
 export const maxDuration = 60;
 

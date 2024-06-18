@@ -1,6 +1,6 @@
 import { redirect } from "next/navigation";
 import { generateId } from "ai";
-import { AI } from "@/app/actions";
+import { AI } from "@/ai/provider";
 import { Chat } from "@/components/chat";
 
 export const maxDuration = 60;

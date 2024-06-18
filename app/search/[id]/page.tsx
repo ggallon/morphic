@@ -1,5 +1,5 @@
 import { notFound, redirect } from "next/navigation";
-import { AI } from "@/app/actions";
+import { AI } from "@/ai/provider";
 import { Chat } from "@/components/chat";
 import { getChat } from "@/lib/actions/chat";
 

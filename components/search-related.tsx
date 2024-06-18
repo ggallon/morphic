@@ -8,7 +8,7 @@ import {
   type StreamableValue,
 } from "ai/rsc";
 import { ArrowRight } from "lucide-react";
-import { AI } from "@/app/actions";
+import { AI } from "@/ai/provider";
 import { Button } from "@/components/ui/button";
 import type { PartialRelated } from "@/lib/schema/related";
 import { UserMessage } from "./user-message";
