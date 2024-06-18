@@ -7,7 +7,7 @@ import {
 import { createStreamableUI, createStreamableValue } from "ai/rsc";
 import { AnswerSection } from "@/components/answer-section";
 import { AnswerSectionGenerated } from "@/components/answer-section-generated";
-import { getModel, transformToolMessages } from "@/lib/utils/get-model";
+import { getModel } from "@/lib/utils/get-model";
 import { getTools } from "./tools";
 
 export async function researcher(

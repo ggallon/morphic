@@ -38,28 +38,20 @@ export function ChatMessages({ messages }: ChatMessagesProps) {
   // Convert grouped messages into an array with explicit type
   const groupedMessagesArray = Object.values(groupedMessages).map((group) => ({
     ...group,
-    components: group.components as React.ReactNode[],
-  })) as {
-    id: string;
-    components: React.ReactNode[];
-    isCollapsed?: StreamableValue<boolean>;
-  }[];
+    components: group.components,
+  }));
 
-  return (
-    <>
-      {groupedMessagesArray.map((groupedMessage: GroupedMessage) => (
-        <CollapsibleMessage
-          key={`${groupedMessage.id}`}
-          message={{
-            id: groupedMessage.id,
-            component: groupedMessage.components.map((component, i) => (
-              <div key={`${groupedMessage.id}-${i}`}>{component}</div>
-            )),
-            isCollapsed: groupedMessage.isCollapsed,
-          }}
-          isLastMessage={groupedMessage.id === messages[messages.length - 1].id}
-        />
-      ))}
-    </>
-  );
+  return groupedMessagesArray.map((groupedMessage) => (
+    <CollapsibleMessage
+      key={groupedMessage.id}
+      message={{
+        id: groupedMessage.id,
+        component: groupedMessage.components.map((component, i) => (
+          <div key={`${groupedMessage.id}-${i}`}>{component}</div>
+        )),
+        isCollapsed: groupedMessage.isCollapsed,
+      }}
+      isLastMessage={groupedMessage.id === messages[messages.length - 1].id}
+    />
+  ));
 }

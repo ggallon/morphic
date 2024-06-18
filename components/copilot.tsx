@@ -17,9 +17,9 @@ import { Input } from "@/components/ui/input";
 import type { PartialInquiry } from "@/lib/schema/inquiry";
 import { useAppState } from "@/lib/utils/app-state";
 
-type CopilotProps = {
+interface CopilotProps {
   inquiry?: StreamableValue<PartialInquiry>;
-};
+}
 
 export const Copilot: React.FC<CopilotProps> = ({ inquiry }: CopilotProps) => {
   const [completed, setCompleted] = useState(false);

@@ -1,11 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@radix-ui/react-collapsible";
+import * as Collapsible from "@radix-ui/react-collapsible";
 import { useStreamableValue, type StreamableValue } from "ai/rsc";
 import { ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -39,13 +35,8 @@ export const CollapsibleMessage: React.FC<CollapsibleMessageProps> = ({
   }
 
   return (
-    <Collapsible
-      open={open}
-      onOpenChange={(value) => {
-        setOpen(value);
-      }}
-    >
-      <CollapsibleTrigger asChild>
+    <Collapsible.Root open={open} onOpenChange={setOpen}>
+      <Collapsible.Trigger asChild>
         <div
           className={cn(
             "flex w-full justify-end",
@@ -63,9 +54,9 @@ export const CollapsibleMessage: React.FC<CollapsibleMessageProps> = ({
             <span className="sr-only">collapse</span>
           </Button>
         </div>
-      </CollapsibleTrigger>
-      <CollapsibleContent>{message.component}</CollapsibleContent>
+      </Collapsible.Trigger>
+      <Collapsible.Content>{message.component}</Collapsible.Content>
       {!open && <Separator className="my-2 bg-muted" />}
-    </Collapsible>
+    </Collapsible.Root>
   );
 };
