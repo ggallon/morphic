@@ -11,26 +11,24 @@ interface AnswerSectionProps {
 }
 
 export function AnswerSection({ result }: AnswerSectionProps) {
-  const [data, error, pending] = useStreamableValue(result);
-  const [content, setContent] = useState<string>("");
+  const [data] = useStreamableValue(result);
+  const [content, setContent] = useState("");
 
   useEffect(() => {
     if (!data) return;
     setContent(data);
   }, [data]);
 
-  return (
-    <div>
-      {content.length > 0 ? (
-        <Section title="Answer">
-          <BotMessage content={content} />
-        </Section>
-      ) : (
-        <div className="flex flex-col gap-2 py-2">
-          <Skeleton className="h-6 w-48" />
-          <Skeleton className="h-6 w-full" />
-        </div>
-      )}
-    </div>
+  return content.length > 0 ? (
+    <Section title="Answer">
+      <BotMessage content={content} />
+    </Section>
+  ) : (
+    <Section title="Answer">
+      <div className="flex flex-col gap-2 py-2">
+        <Skeleton className="h-6 w-48" />
+        <Skeleton className="h-6 w-full" />
+      </div>
+    </Section>
   );
 }

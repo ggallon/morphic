@@ -9,10 +9,8 @@ interface AnswerSectionProps {
 
 export function AnswerSectionGenerated({ result }: AnswerSectionProps) {
   return (
-    <div>
-      <Section title="Answer">
-        <BotMessage content={result} />
-      </Section>
-    </div>
+    <Section title="Answer">
+      <BotMessage content={result} />
+    </Section>
   );
 }
