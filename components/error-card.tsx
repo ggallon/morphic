@@ -2,11 +2,11 @@
 
 import { useActions, useAIState, useUIState } from "ai/rsc";
 import { RefreshCcw } from "lucide-react";
-import { AI } from "@/app/actions";
+import { AI } from "@/ai/provider";
+import type { AIMessage } from "@/ai/types";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
-import type { AIMessage } from "@/lib/types";
 
 interface ErrorCardProps {
   errorMessage: string;

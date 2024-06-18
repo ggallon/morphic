@@ -5,8 +5,11 @@ import { fontFamily } from "tailwindcss/defaultTheme";
 
 const config: Config = {
   darkMode: "selector",
-  content: ["./components/**/*.{ts,tsx}", "./app/**/*.{ts,tsx}"],
-  prefix: "",
+  content: [
+    "./ai/**/*.{ts,tsx}",
+    "./app/**/*.{ts,tsx}",
+    "./components/**/*.{ts,tsx}",
+  ],
   theme: {
     container: {
       center: true,
