@@ -1,11 +1,11 @@
+> [!NOTE]
+> Please note that there are differences between this fork and the official repository by [miurla](https://github.com/miurla/morphic). For example, this repository doesn't support the Ollama provider.
+
 # Morphic
 
 An AI-powered search engine with a generative UI.
 
 ![capture](/public/capture-240404_blk.png)
-
-> [!NOTE]
-> Please note that there are differences between this repository and the official website [morphic.sh](morphic.sh). The official website is a fork of this repository with additional features such as authentication, which are necessary for providing the service online. The core source code of Morphic resides in this repository, and it's designed to be easily built and deployed.
 
 ## 🗂️ Overview
 
@@ -21,8 +21,8 @@ An AI-powered search engine with a generative UI.
 - Search and answer using GenerativeUI
 - Understand user's questions
 - Search history functionality
-- Share search results ([Optional](https://github.com/miurla/morphic/blob/main/.env.local.example))
-- Video search support ([Optional](https://github.com/miurla/morphic/blob/main/.env.local.example))
+- Share search results ([Optional](https://github.com/ggallon/morphic/blob/main/.env.local.example))
+- Video search support ([Optional](https://github.com/ggallon/morphic/blob/main/.env.local.example))
 - Get answers from specified URLs
 - Use as a search engine [※](#-search-engine)
 - Support for providers other than OpenAI
@@ -99,7 +99,7 @@ Host your own live version of Morphic with Vercel or Cloudflare Pages.
 
 ### Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fmiurla%2Fmorphic&env=OPENAI_API_KEY,TAVILY_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fggallon%2Fmorphic&env=OPENAI_API_KEY,TAVILY_API_KEY,UPSTASH_REDIS_REST_URL,UPSTASH_REDIS_REST_TOKEN)
 
 ### Cloudflare Pages
 
@@ -126,7 +126,7 @@ If you want to use Morphic as a search engine in your browser, follow these step
 5. Fill in the fields as follows:
    - **Search engine**: Morphic
    - **Shortcut**: morphic
-   - **URL with %s in place of query**: `https://morphic.sh/search?q=%s`
+   - **URL with %s in place of query**: `https://yoursite.com/search?q=%s`
 6. Click "Add" to save the new search engine.
 7. Find "Morphic" in the list of site search, click on the three dots next to it, and select "Make default".
 
