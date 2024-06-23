@@ -2,7 +2,9 @@ import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 
 export const isSecurePath = (pathname: string) =>
-  ["/search"].some((prefix) => pathname === "/" ?? pathname.startsWith(prefix));
+  ["/search"].some((prefix) =>
+    pathname === "/" ? true : pathname.startsWith(prefix),
+  );
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   debug: process.env.NODE_ENV === "development",
