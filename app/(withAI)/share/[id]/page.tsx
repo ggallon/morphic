@@ -11,13 +11,8 @@ interface SharePageProps {
 
 export async function generateMetadata({ params }: SharePageProps) {
   const chat = await getSharedChat(params.id);
-
-  if (!chat || !chat.sharePath) {
-    return notFound();
-  }
-
   return {
-    title: chat?.title.toString().slice(0, 50) || "Search",
+    title: chat?.title.toString().slice(0, 50) ?? "Search",
   };
 }
 
