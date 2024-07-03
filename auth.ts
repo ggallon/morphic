@@ -1,5 +1,23 @@
-import NextAuth from "next-auth";
+import NextAuth, { type DefaultSession } from "next-auth";
+import { JWT } from "next-auth/jwt";
 import GitHub from "next-auth/providers/github";
+
+declare module "next-auth" {
+  interface Session {
+    user: {
+      /** The user's id. */
+      id: string;
+    } & DefaultSession["user"];
+  }
+}
+
+declare module "next-auth/jwt" {
+  /** Returned by the `jwt` callback and `auth`, when using JWT sessions */
+  interface JWT {
+    /** OpenID ID Token */
+    id?: string;
+  }
+}
 
 export const isSecurePath = (pathname: string) =>
   ["/search"].some((prefix) =>
@@ -11,17 +29,20 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [GitHub],
   session: { strategy: "jwt" },
   callbacks: {
-    signIn({ user }) {
-      console.log("signIn: ", user);
-      return true;
-    },
-    session({ session }) {
-      console.log("session: ", session);
-      return session;
-    },
-    jwt({ token }) {
-      console.log("session: ", token);
+    jwt({ profile, token }) {
+      if (profile?.id) {
+        token.id = profile.id;
+      }
       return token;
+    },
+    session({ session, token }) {
+      if (session?.user && token?.id) {
+        session = {
+          ...session,
+          user: { ...session.user, id: String(token.id) },
+        };
+      }
+      return session;
     },
     authorized({ auth, request }) {
       if (isSecurePath(request.nextUrl.pathname)) {

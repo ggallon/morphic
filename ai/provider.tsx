@@ -1,3 +1,4 @@
+import { auth } from "@/auth";
 import { generateId } from "ai";
 import { createAI, getAIState } from "ai/rsc";
 import { saveChat } from "@/lib/actions/chat";
@@ -6,20 +7,18 @@ import { submit } from "./actions";
 import { getUIStateFromAIState } from "./get-ui-state";
 import type { AIState, UIState } from "./types";
 
-const initialAIState: AIState = {
-  chatId: generateId(),
-  messages: [],
-};
-
-const initialUIState: UIState = [];
-
 // AI is a provider you wrap your application with so you can access AI and UI state in your components.
 export const AI = createAI<AIState, UIState>({
   actions: { submit },
-  initialAIState,
-  initialUIState,
+  initialAIState: { chatId: generateId(), messages: [] },
+  initialUIState: [],
   onGetUIState: async () => {
     "use server";
+
+    const session = await auth();
+    if (!session?.user?.id) {
+      return;
+    }
 
     const aiState = getAIState();
     if (aiState) {
@@ -31,6 +30,11 @@ export const AI = createAI<AIState, UIState>({
   onSetAIState: async ({ state, done }) => {
     "use server";
 
+    const session = await auth();
+    if (!session?.user?.id) {
+      return;
+    }
+
     // Check if there is any message of type 'answer' in the state messages
     if (!state.messages.some((m) => m.type === "answer")) {
       return undefined;
@@ -38,7 +42,7 @@ export const AI = createAI<AIState, UIState>({
 
     const { chatId, messages } = state;
     const createdAt = new Date();
-    const userId = "anonymous";
+    const userId = session.user.id;
     const path = `/search/${chatId}`;
     const title =
       messages.length > 0
