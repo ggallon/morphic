@@ -7,11 +7,18 @@ import { submit } from "./actions";
 import { getUIStateFromAIState } from "./get-ui-state";
 import type { AIState, UIState } from "./types";
 
+const initialAIState: AIState = {
+  chatId: generateId(),
+  messages: [],
+};
+
+const initialUIState: UIState = [];
+
 // AI is a provider you wrap your application with so you can access AI and UI state in your components.
 export const AI = createAI<AIState, UIState>({
   actions: { submit },
-  initialAIState: { chatId: generateId(), messages: [] },
-  initialUIState: [],
+  initialAIState,
+  initialUIState,
   onGetUIState: async () => {
     "use server";
 
