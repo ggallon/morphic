@@ -1,6 +1,26 @@
+import { Suspense } from "react";
+import Link from "next/link";
+import { auth } from "@/auth";
+import { Button } from "@/components/ui/button";
 import { IconLogo } from "@/components/ui/icons";
 import { HistoryContainer } from "./history-container";
 import { ModeToggle } from "./mode-toggle";
+import { UserMenu } from "./user-menu";
+
+async function UserOrLogin() {
+  const session = await auth();
+  return (
+    <div className="flex items-center">
+      {session?.user ? (
+        <UserMenu user={session.user} />
+      ) : (
+        <Button variant="link" asChild className="-ml-2">
+          <Link href="/login">Login</Link>
+        </Button>
+      )}
+    </div>
+  );
+}
 
 export const Header: React.FC = async () => {
   return (
@@ -13,6 +33,9 @@ export const Header: React.FC = async () => {
       </div>
       <div className="flex gap-0.5">
         <ModeToggle />
+        <Suspense fallback={<div className="flex-1 overflow-auto" />}>
+          <UserOrLogin />
+        </Suspense>
         <HistoryContainer location="header" />
       </div>
     </header>

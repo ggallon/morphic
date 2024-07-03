@@ -2,6 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
+import { auth } from "@/auth";
 import { Redis } from "@upstash/redis";
 import type { Chat } from "@/lib/types";
 
@@ -33,19 +34,24 @@ export async function getChats(userId?: string | null) {
   }
 }
 
-export async function getChat(id: string, userId: string = "anonymous") {
+export async function getChat(id: string, userId: string) {
   const chat = await redis.hgetall<Chat>(`chat:${id}`);
-
-  if (!chat) {
+  if (String(chat?.userId) !== userId) {
     return null;
   }
 
   return chat;
 }
 
-export async function clearChats(
-  userId: string = "anonymous",
-): Promise<{ error?: string }> {
+export async function clearChats(): Promise<void | { error?: string }> {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return {
+      error: "Unauthorized",
+    };
+  }
+
+  const userId = session.user.id;
   const chats: string[] = await redis.zrange(`user:chat:${userId}`, 0, -1);
   if (!chats.length) {
     return { error: "No chats to clear" };
@@ -63,7 +69,12 @@ export async function clearChats(
   redirect("/");
 }
 
-export async function saveChat(chat: Chat, userId: string = "anonymous") {
+export async function saveChat(chat: Chat) {
+  const session = await auth();
+  if (!session?.user) {
+    return;
+  }
+
   const pipeline = redis.pipeline();
   pipeline.hmset(`chat:${chat.id}`, chat);
   pipeline.zadd(`user:chat:${chat.userId}`, {
@@ -83,11 +94,19 @@ export async function getSharedChat(id: string) {
   return chat;
 }
 
-export async function shareChat(id: string, userId: string = "anonymous") {
-  const chat = await redis.hgetall<Chat>(`chat:${id}`);
+export async function shareChat(id: string) {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return {
+      error: "Unauthorized",
+    };
+  }
 
-  if (!chat || chat.userId !== userId) {
-    return null;
+  const chat = await redis.hgetall<Chat>(`chat:${id}`);
+  if (!chat || chat.userId !== session.user.id) {
+    return {
+      error: "Something went wrong",
+    };
   }
 
   const payload = {
