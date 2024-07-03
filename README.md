@@ -1,5 +1,6 @@
 > [!NOTE]
-> Please note that there are differences between this fork and the official repository by [miurla](https://github.com/miurla/morphic). For example, this repository doesn't support the Ollama provider.
+> Please note that there are differences between this fork and the official repository by [miurla](https://github.com/miurla/morphic).
+> For example, this repository does not support the Ollama provider and has user authentication.
 
 # Morphic
 
