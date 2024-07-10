@@ -23,10 +23,10 @@ interface ChatShareProps {
 }
 
 export function ChatShare({ chatId, className }: ChatShareProps) {
-  const [open, setOpen] = useState(false);
-  const [pending, startTransition] = useTransition();
   const { copyToClipboard } = useCopyToClipboard({ timeout: 1000 });
-  const [shareUrl, setShareUrl] = useState("");
+  const [open, setOpen] = useState(false);
+  const [shareUrl, setShareUrl] = useState<string | null>(null);
+  const [pending, startTransition] = useTransition();
 
   const handleShare = async () => {
     startTransition(() => {
@@ -83,16 +83,13 @@ export function ChatShare({ chatId, className }: ChatShareProps) {
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="items-center">
-            {!shareUrl && (
-              <Button onClick={handleShare} disabled={pending} size="sm">
-                {pending ? <Spinner /> : "Get link"}
-              </Button>
-            )}
-            {shareUrl && (
-              <Button onClick={handleCopy} disabled={pending} size="sm">
-                {"Copy link"}
-              </Button>
-            )}
+            <Button
+              onClick={shareUrl ? handleCopy : handleShare}
+              disabled={pending}
+              size="sm"
+            >
+              {shareUrl ? "Copy link" : pending ? <Spinner /> : "Get link"}
+            </Button>
           </DialogFooter>
         </DialogContent>
       </Dialog>
