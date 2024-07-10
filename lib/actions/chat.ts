@@ -18,17 +18,15 @@ export async function getChats(userId?: string | null) {
 
   try {
     const pipeline = redis.pipeline();
-    const chats: string[] = await redis.zrange(`user:chat:${userId}`, 0, -1, {
+    const chats = await redis.zrange<string[]>(`user:chat:${userId}`, 0, -1, {
       rev: true,
     });
 
     for (const chat of chats) {
-      pipeline.hgetall(chat);
+      pipeline.hgetall<Chat>(chat);
     }
 
-    const results = await pipeline.exec();
-
-    return results as Chat[];
+    return await pipeline.exec<Chat[]>();
   } catch (error) {
     return [];
   }
@@ -71,8 +69,10 @@ export async function clearChats(): Promise<void | { error?: string }> {
 
 export async function saveChat(chat: Chat) {
   const session = await auth();
-  if (!session?.user) {
-    return;
+  if (!session?.user?.id) {
+    return {
+      error: "Unauthorized",
+    };
   }
 
   const pipeline = redis.pipeline();
