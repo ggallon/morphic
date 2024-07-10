@@ -98,6 +98,7 @@ export async function shareChat(id: string) {
   const session = await auth();
   if (!session?.user?.id) {
     return {
+      data: null,
       error: "Unauthorized",
     };
   }
@@ -105,16 +106,20 @@ export async function shareChat(id: string) {
   const chat = await redis.hgetall<Chat>(`chat:${id}`);
   if (!chat || chat.userId !== session.user.id) {
     return {
+      data: null,
       error: "Something went wrong",
     };
   }
 
-  const payload = {
+  const data: Chat = {
     ...chat,
-    sharePath: `/share/${id}`,
+    sharePath: `/share/${chat.id}`,
   };
 
-  await redis.hmset(`chat:${id}`, payload);
+  await redis.hmset(`chat:${chat.id}`, data);
 
-  return payload;
+  return {
+    data,
+    error: null,
+  };
 }

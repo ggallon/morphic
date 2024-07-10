@@ -32,18 +32,18 @@ export function ChatShare({ chatId, className }: ChatShareProps) {
     startTransition(() => {
       setOpen(true);
     });
-    const result = await shareChat(chatId);
-    if (!result) {
+    const { data, error } = await shareChat(chatId);
+    if (error) {
       toast.error("Failed to share chat");
       return;
     }
 
-    if (!result.sharePath) {
+    if (!data?.sharePath) {
       toast.error("Could not copy link to clipboard");
       return;
     }
 
-    const url = new URL(result.sharePath, window.location.href);
+    const url = new URL(data.sharePath, window.location.href);
     setShareUrl(url.toString());
   };
 
