@@ -5,7 +5,7 @@ import type { CoreMessage } from "ai";
 export function getModel() {
   const openaiApiBase = process.env.OPENAI_API_BASE;
   const openaiApiKey = process.env.OPENAI_API_KEY;
-  let openaiApiModel = process.env.OPENAI_API_MODEL || "gpt-4o";
+  const openaiApiModel = process.env.OPENAI_API_MODEL || "gpt-4o";
   const googleApiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
 
   if (!openaiApiKey && !googleApiKey) {
